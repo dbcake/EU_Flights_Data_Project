@@ -1,0 +1,48 @@
+version: 2
+
+models:
+  - name: stg_aircraft_types
+    description: >
+      This staging model processes the airport data copied from a CSV file in an internal stage. The file was downloaded from the https://ourairports.com/ website.
+
+    columns:
+      - name: ManufacturerCode
+        description: "The ICAO uses a naming convention for aircraft manufacturers in order to be specific when mentioning an aircraft manufacturer's name."
+        tests:
+          - not_null
+      - name: Designator
+        description: "An aircraft type designator is a 2 to 4 character alphanumeric code designating every aircraft type/subtype."
+        tests:
+          - not_null
+      - name: AircraftDescription
+        description: "Type of the aircraft."
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['LandPlane', 'Amphibian', 'Helicopter', 'Gyrocopter', 'SeaPlane', 'Tilt-wing']
+      - name: EngineCount
+        description: "The number of engines on the aircraft."
+        tests:
+          - not_null
+          - dbt_expectations.expect_column_values_to_be_of_type:
+              column_type: NUMBER
+      - name: EngineType
+        description: "The power component of an aircraft propulsion system."
+        tests:
+          - not_null
+          - accepted_values:
+              values: [ 'Jet', 'Turboprop/Turboshaft', 'Piston', 'Electric', 'Rocket' ]
+      - name: WTC
+        description: "Wake Turbulence Category is a category based on the disturbance in the atmosphere that forms behind an aircraft."
+        tests:
+          - not_null
+          - accepted_values:
+              values: [ 'L', 'M', 'H', 'J', 'L/M' ]
+      - name: ModelFullName
+        description: "The model of the aircraft."
+        tests:
+          - not_null
+      - name: Description
+        description: "The model of the aircraft."
+        tests:
+          - not_null

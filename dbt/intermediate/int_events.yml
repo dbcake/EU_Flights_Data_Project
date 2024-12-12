@@ -1,0 +1,11 @@
+version: 2
+
+models:
+  - name: int_events
+    description: >
+      This intermediate model joins the stg_event model with the fct_flights model to add DOF as a convenience.
+    columns:
+      - name: dof
+        description: "The date of the flight based on first seen data."
+        tests:
+          - not_null

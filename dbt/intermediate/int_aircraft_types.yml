@@ -1,0 +1,11 @@
+version: 2
+
+models:
+  - name: int_aircraft_types
+    description: >
+      This staging model processes the aircraft data based on a staging model. The model removes duplications coming from different (sub)types of the same aircraft model.
+    tests:
+          - dbt_expectations.expect_compound_columns_to_be_unique:
+              column_list: ["ManufacturerCode", "TypeDesignator", "AircraftType", "EngineCount", "EngineType", "WTC"]
+              ignore_row_if: "any_value_is_missing"
+              quote_columns: false

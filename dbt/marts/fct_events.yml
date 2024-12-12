@@ -1,0 +1,66 @@
+version: 2
+
+models:
+  - name: fct_events
+    description: >
+      This fact table for events.
+
+    columns:
+      - name: ID
+        description: "The ID of the event."
+        tests:
+          - not_null
+      - name: flight_id
+        description: "The ID of the related flight."
+        tests:
+          - not_null
+      - name: type
+        description: "Tyoe of the event, e.g. landing, take off, level crossing, etc."
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['entry-parking_position' ,'entry-runway' ,'entry-taxiway' ,'exit-parking_position' ,'exit-runway' ,'exit-taxiway' ,'first-xing-fl100' ,'first-xing-fl245' ,'first-xing-fl50' ,'first-xing-fl70' ,'first_seen' ,'landing' ,'last-xing-fl100' ,'last-xing-fl245' ,'last-xing-fl50' ,'last-xing-fl70' ,'last_seen' ,'level-end' ,'level-start' ,'take-off' ,'top-of-climb' ,'top-of-descent' ]
+      - name: event_time
+        description: "Time of the event."
+        tests:
+          - not_null
+      - name: longitude
+        description: "The longitude coordinate value."
+        tests:
+          - not_null
+          - dbt_expectations.expect_column_values_to_be_of_type:
+              column_type: float
+          - dbt_expectations.expect_column_values_to_be_between:
+              min_value: -180
+              max_value: 180
+              strictly: false
+      - name: latitude
+        description: "The latitude coordinate value."
+        tests:
+          - not_null
+          - dbt_expectations.expect_column_values_to_be_of_type:
+              column_type: float
+          - dbt_expectations.expect_column_values_to_be_between:
+              min_value: -90
+              max_value: 90
+              strictly: false
+      - name: altitude
+        description: "The altitude of the event, in feets."
+        tests:
+          - dbt_expectations.expect_column_values_to_be_of_type:
+              column_type: number
+          - dbt_expectations.expect_column_values_to_be_between:
+              max_value: 200000
+              strictly: true
+      - name: info
+        description: "Additional information."
+      - name: time_passed
+        description: "The time_passed since first seen."
+        tests:
+          - dbt_expectations.expect_column_values_to_be_of_type:
+              column_type: float
+      - name: distance_flown
+        description: "The distance flown by the aircraft."
+        tests:
+          - dbt_expectations.expect_column_values_to_be_of_type:
+              column_type: float

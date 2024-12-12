@@ -1,0 +1,18 @@
+version: 2
+
+models:
+  - name: sum_yearly_metric_array
+    description: >
+      This model creates an aggregation of all periods of flights flying through each hexagonal bin.
+
+    columns:
+      - name: hex
+        description: "The HEX code of the H3 hexagonal bin."
+        tests:
+          - not_null
+      - name: count
+        description: "The number of flights touching the hexagonal bin in total."
+        tests:
+          - not_null
+          - dbt_expectations.expect_column_values_to_be_of_type:
+              column_type: FLOAT

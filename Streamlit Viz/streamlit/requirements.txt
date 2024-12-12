@@ -1,0 +1,10 @@
+altair
+branca
+matplotlib
+numpy
+pandas
+pydeck
+requests
+typing
+snowflake-snowpark-python
+streamlit

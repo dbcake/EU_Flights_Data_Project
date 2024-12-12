@@ -1,0 +1,13 @@
+name: sf_env
+channels:
+- snowflake
+dependencies:
+- scikit-learn
+- streamlit
+- pydeck
+- pandas
+- numpy
+- branca
+- requests
+- typing
+- snowflake-snowpark-python

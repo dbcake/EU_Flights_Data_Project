@@ -1,0 +1,46 @@
+version: 2
+
+models:
+  - name: stg_airports
+    description: >
+      This staging model processes the airport data copied from a CSV file in an internal stage. The file was downloaded from the https://ourairports.com/ website.
+
+    columns:
+      - name: id
+        description: "Identifier of the aerodrome."
+        tests:
+          - not_null
+      - name: icao_code
+        description: "The ICAO airport code or location indicator, a four-letter code designating aerodromes around the world."
+        tests:
+          - not_null
+      - name: type
+        description: "Type of the aerodrome."
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['heliport', 'closed', 'small_airport', 'seaplane_base', 'medium_airport', 'large_airport', 'balloonport']
+      - name: iso_country
+        description: "The internationally recognized code of the country the aerodrome is located in."
+        tests:
+          - not_null
+      - name: airport
+        description: "Name of the aerodrome."
+        tests:
+          - not_null
+      - name: latitude
+        description: "Geographic coordinate specifying the north–south position of the location."
+        tests:
+          - not_null
+          - dbt_expectations.expect_column_values_to_be_of_type:
+              column_type: float
+      - name: longitude
+        description: "Geographic coordinate specifying the east-west position of the location."
+        tests:
+          - not_null
+          - dbt_expectations.expect_column_values_to_be_of_type:
+              column_type: float
+      - name: elevation
+        description: "The elevation of the location in feets."
+      - name: municipality
+        description: "The name of the area the aerodrome is located in."

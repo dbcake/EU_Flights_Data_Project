@@ -1,0 +1,43 @@
+version: 2
+
+models:
+  - name: view_events_lagged
+    description: >
+      View with all events and their previous events.
+
+
+    columns:
+      - name: prev_event_time
+        description: "Time of the previous event."
+        tests:
+          - dbt_expectations.expect_column_values_to_be_of_type:
+              column_type: TIMESTAMP_NTZ 
+      - name: prev_longitude
+        description: "The longitude coordinate value of the previous event."
+        tests:
+          - dbt_expectations.expect_column_values_to_be_of_type:
+              column_type: float
+          - dbt_expectations.expect_column_values_to_be_between:
+              min_value: -180
+              max_value: 180
+              strictly: false
+              row_condition: "prev_longitude is not null"
+      - name: prev_latitude
+        description: "The latitude coordinate value of the previous event."
+        tests:
+          - dbt_expectations.expect_column_values_to_be_of_type:
+              column_type: float
+          - dbt_expectations.expect_column_values_to_be_between:
+              min_value: -90
+              max_value: 90
+              strictly: false
+              row_condition: "prev_latitude is not null"
+      - name: prev_altitude
+        description: "The altitude of the previous event, in feets."
+        tests:
+          - dbt_expectations.expect_column_values_to_be_of_type:
+              column_type: number
+          - dbt_expectations.expect_column_values_to_be_between:
+              max_value: 200000
+              strictly: true
+              row_condition: "prev_altitude is not null"

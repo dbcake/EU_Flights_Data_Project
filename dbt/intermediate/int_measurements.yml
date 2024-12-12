@@ -1,0 +1,19 @@
+version: 2
+
+models:
+  - name: int_measurements
+    description: >
+      This intermediate model pivots the measurements in preparation for joining with the events model.
+    columns:
+      - name: event_id
+        description: "The ID of the related event."
+        tests:
+          - not_null
+      - name: time_passed
+        description: "The time_passed since first seen."
+        tests:
+          - not_null
+      - name: distance_flown
+        description: "The distance flown by the aircraft."
+        tests:
+          - not_null

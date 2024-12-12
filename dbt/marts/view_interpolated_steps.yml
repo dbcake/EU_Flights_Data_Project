@@ -1,0 +1,27 @@
+version: 2
+
+models:
+  - name: view_interpolated_steps
+    description: >
+      View which calculates the distance between events and how many interpolated steps there are between them based on the width of a hexagonal bin at 8 resolution.
+
+    columns:
+      - name: distance_km
+        description: "Distance between the event and the previous event based on their coordinates."
+        tests:
+          - dbt_expectations.expect_column_values_to_be_between:
+              min_value: 0
+              max_value: 100000
+              strictly: false
+              row_condition: "distance_km is not null" 
+      - name: steps
+        description: "The number of steps between events."
+        tests:
+          - dbt_expectations.expect_column_values_to_be_between:
+              min_value: 0
+              max_value: 100000
+              row_condition: "steps is not null" 
+              strictly: false
+      - name: waypoints
+        description: "An array of coordinates for the interpolated waypoints between events."
+

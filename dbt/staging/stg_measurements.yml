@@ -1,0 +1,29 @@
+version: 2
+
+models:
+  - name: stg_measurements
+    description: >
+      This staging model processes the measurements data copied from a CSV file in an internal stage. The file was downloaded from the OPDI website.
+
+    columns:
+      - name: ID
+        description: "The ID of the measurement."
+        tests:
+          - not_null
+          - unique
+      - name: EVENT_ID
+        description: "The ID of the related event."
+        tests:
+          - not_null
+      - name: TYPE
+        description: "The type of the measurement."
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['Distance flown (NM)', 'Time Passed (s)']
+      - name: VALUE
+        description: "The value of the measurement."
+        tests:
+          - not_null
+          - dbt_expectations.expect_column_values_to_be_of_type:
+              column_type: float

@@ -1,0 +1,24 @@
+version: 2
+
+models:
+  - name: stg_aircrafts
+    description: >
+      This staging model processes the aircraft data copied from a CSV file in an internal stage. The file was downloaded from the OpenSky Network website.
+
+    columns:
+      - name: ICAO24
+        description: "The ICAO code of the aircraft."
+        tests:
+          - not_null
+      - name: OPERATORICAO
+        description: "The ICAO code of the aircraft operator."
+      - name: COUNTRY
+        description: "Name of the country the aircraft is registered in."
+      - name: REGISTRATION
+        description: "The registration of the aircraft."
+      - name: MANUFACTURERICAO
+        description: "The ICAO uses a naming convention for aircraft manufacturers in order to be specific when mentioning an aircraft manufacturer's name."
+      - name: MANUFACTURER
+        description: "The name of the aircraft manufacturer."
+      - name: TYPECODE
+        description: "An aircraft type designator is a 2 to 4 character alphanumeric code designating every aircraft type/subtype."

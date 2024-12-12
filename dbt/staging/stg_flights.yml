@@ -1,0 +1,34 @@
+version: 2
+
+models:
+  - name: stg_flights
+    description: >
+      This staging model processes the flights data copied from a CSV file in an internal stage. The file was downloaded from the OPDI website.
+
+    columns:
+      - name: ID
+        description: "The ID of the record."
+        tests:
+          - not_null
+      - name: ADEP
+        description: "The aerodrome of departure."
+      - name: ADES
+        description: "The aerodrome of destination."
+      - name: ICAO24
+        description: "The 24 bit ICAO identifier of the aircraft."
+        tests:
+          - not_null
+      - name: FLT_ID
+        description: "Flight ID or call sign of the flight."
+      - name: FIRST_SEEN
+        description: "The timestamp when first detected."
+        tests:
+          - not_null
+      - name: LAST_SEEN
+        description: "The timestamp when last detected."
+        tests:
+          - not_null
+      - name: DOF
+        description: "Date of the flight."
+        tests:
+          - not_null
