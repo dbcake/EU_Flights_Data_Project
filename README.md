@@ -50,27 +50,27 @@ This is a rough list of the steps I went through building this project.
 - The price of data
 - Concluded on the data sources used and the use case
 #### 3. Performed Exploratory Data Analysis
-- I chosed Google Colab's Jupyter Notebook environment to experiment with the data and share it with others
-- I used DuckDB to easily process the files and run sum basic statistics
+- I chose Google Colab's Jupyter Notebook environment to experiment with the data and share it with others
+- I used DuckDB to easily process the files and run some basic statistics
 - Identified Data Quality issues, e.g. missing data mostly in the flights and aircrafts data sources
 - I used Leafmap within the notebook to visualize Geospatial data as a proof of concept
 #### 4. Conceptual Data Model and Architecture Diagram
 - Created the Conceptual Data Model
-- Created an initial archictural overview based on the array of tools and services available to us within the Bootcamp
+- Created an initial architectural overview based on the array of tools and services available to us within the Bootcamp
 #### 5. Created a Data Dictionary
 - From the Conceptual Data Model I created the Logical Data Model
 - After some experimentation with different tools I decided on the final tech stack
 - Created the Physical Data Model
 - Created a Data Dictionary listing all tables and fields with their information
 #### 6. Wrote the ETL pipelines to transform the data.
-- Created extract tasks to read parquet files from the web and load it into the Data Warehouse
+- Created extract tasks to read parquet files from the web and loaded it into the Data Warehouse
 - Created transformation models in dbt 
 - Defined tests for each source and table
 #### 7. Ran the ETL pipelines and QA checks
 - Created dags for data sources of varying extract intervals
 - Tested and optimized the running of the dags
 #### 8. Created Visualizations
-- Built Streamlit app with custom visualitations and interactive widgets
+- Built Streamlit app with custom visualizations and interactive widgets
 - Tested and improved user experience
 - Added instructions and contextual information for end users
 
@@ -313,7 +313,7 @@ Source of the table
 | EngineCount      | Integer      |        | 1    |                                                                                                                           | The number of engines on the aircraft.                                                                                                                                                                                                   |             |
 | EngineType       | Varchar      |        |      | J - jet<br>T - turboprop,turboshaft<br>P - piston<br>E - electric<br>R - rocket                                           | [The power component of an aircraft propulsion system.](https://en.wikipedia.org/wiki/Aircraft_engine)                                                                                                                                   |             |
 | TypeDesignator   | Varchar |        | 2-4  | hex                                                                                                                       | An [aircraft type designator](https://en.wikipedia.org/wiki/List_of_aircraft_type_designators) is a 2 to 4 character alphanumeric code designating every aircraft type/subtype.                                                          |             |
-| WTC              | Varchar      |        | 1    | L - Light , <=7 t<br>M - Medium, >7 t, <=136 t<br>H - Heavy >136 t, except Super<br>J - Super, specified in ICAO Doc 8643 | [Wake turbulence category](https://en.wikipedia.org/wiki/Wake_turbulence_category) is a category based on the disturbance in the atmosphere that forms behind an aircraft.<br>                                                           |             |
+| WTC              | Varchar      |        | 1    | L - Light, <=7 t<br>M - Medium, >7 t, <=136 t<br>H - Heavy >136 t, except Super<br>J - Super, specified in ICAO Doc 8643 | [Wake turbulence category](https://en.wikipedia.org/wiki/Wake_turbulence_category) is a category based on the disturbance in the atmosphere that forms behind an aircraft.<br>                                                           |             |
 
 ---
 #### Airports
